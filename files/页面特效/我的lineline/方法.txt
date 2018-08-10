@@ -1,0 +1,18 @@
+很久之前看到atool在线工具网站用了这个背景，现在心血来潮也搬过来用了，下面就记录一下用法以便童靴们易于操作。
+
+原理：
+利用canvas-nest.js脚本实现canvas上绘制的蜂窝状网站背景，效果可见我的网站，很是有魔性。
+
+特性：
+不依赖于 jQuery 和 JavaScript 框架
+轻量级，只有 1.66kb 大小
+非常容易使用
+
+使用：
+1、下载canvas-nest.min.js脚本文件：点击下载
+
+2、通过FTP等方法上传到自己网站上，得到脚本的URL链接。
+
+3、添加下面代码到网站</body>标签之前即可（注意：下面src后面的链接替换为上一步得到的脚本链接，或者用下面的src也可以的）
+
+<script src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js" type="text/javascript"></script>

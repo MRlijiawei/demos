@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<title>星空效果_www.jb51.net</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" /> 
+<style type="text/css"> 
+<!-- 
+body{ 
+margin:0px; 
+padding:0px; 
+} 
+body,td{ 
+font-size:9pt; 
+} 
+.star{ 
+position:absolute; 
+width:1px; 
+height:1px; 
+font-size:0px; 
+background-color:#ffffff; 
+} 
+--> 
+</style> 
+<script type="text/javascript"> 
+<!-- 
+try{ 
+var winSize = { 
+width:document.documentElement.clientWidth, 
+height:document.documentElement.clientHeight 
+} 
+var MooSky = function(options){ 
+this.options = options; 
+this.stars = new Array(); 
+this.show = function(){ 
+for(var i=0;i<this.options.num;i++){ 
+var newStar = new MooStar({ 
+container : this.options.container 
+}); 
+newStar.fly(); 
+this.stars[i] = newStar; 
+} 
+} 
+} 
+var MooStar = function(options){ 
+this.options = options; 
+if(!!this.options.container){ 
+this.container = document.getElementById(this.options.container); 
+}else{ 
+this.container = document.body; 
+} 
+this.baseSpeed = 10; 
+var o = this; 
+this.speed = Math.round(Math.random()*this.baseSpeed)+1; 
+this.dom = document.createElement('DIV'); 
+this.dom.className = 'star'; 
+if(!!this.options.container){ 
+var left = Math.round(Math.random()*this.container.offsetWidth-1); 
+var top = Math.round(Math.random()*this.container.offsetHeight-1); 
+this.dom.style.left = left+'px'; 
+this.dom.style.top = top+'px'; 
+this.container.appendChild(this.dom); 
+}else{ 
+this.dom.style.left = Math.random()*winSize.width-1+'px'; 
+this.dom.style.top = Math.random()*winSize.height-1+'px'; 
+document.body.appendChild(this.dom); 
+} 
+} 
+MooStar.prototype.fly = function(){ 
+if(this.dom.offsetLeft<0){ 
+if(!!this.options.container){ 
+var left = this.container.offsetWidth-1; 
+var top = Math.round(Math.random()*this.container.offsetHeight)-1; 
+this.dom.style.left = left+'px'; 
+this.dom.style.top = top+'px'; 
+}else{ 
+this.dom.style.left = winSize.width-1+'px'; 
+this.dom.style.top = Math.random()*winSize.height-1+'px'; 
+} 
+}else{ 
+var left = this.dom.offsetLeft-this.speed; 
+if(left<0) { 
+this.speed = Math.round(Math.random()*this.baseSpeed)+1; 
+if(!!this.options.container){ 
+left = this.container.offsetWidth-1; 
+var top = Math.random()*this.container.offsetHeight-1; 
+this.dom.style.top = top+'px'; 
+}else{ 
+left = winSize.width-1; 
+} 
+} 
+this.dom.style.left = left+'px'; 
+var self = this; 
+setTimeout(function(){self.fly()},this.speed); 
+} 
+} 
+window.onload = function(){ 
+var mooSky1 = new MooSky({ 
+num:30, 
+container : 'skyContainer1' //如果不声明container，则是给document.body实现 
+}); 
+mooSky1.show(); 
+var mooSky2 = new MooSky({ 
+num:20, 
+container : 'skyContainer2' 
+}); 
+mooSky2.show(); 
+/* 
+//这是给body用的 
+var mooSky3 = new MooSky({ 
+num:20 
+}); 
+mooSky3.show(); 
+*/ 
+} 
+window.onresize = function(){ 
+winSize = { 
+width:document.documentElement.clientWidth, 
+height:document.documentElement.clientHeight 
+} 
+} 
+}catch(e){ 
+alert(e.description); 
+} 
+//--> 
+</script> 
+</head> 
+<body scroll=no bgcolor=#000000> 
+<div id='skyContainer1' style="height:100px;background-color:#222222;overflow:hidden;font-size:70px;color:#FFFF00;font-weight:bolder">ABCD</div> 
+<div id='skyContainer2' style="position:absolute;left:200px;top:200px;width:500px;height:100px;background-color:#222222;"></div> 
+</body> 
+</html> 
+

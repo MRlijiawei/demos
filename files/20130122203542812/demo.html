@@ -1,0 +1,64 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>·ÖÏíÒ»¿îECOTree¹«Ë¾×éÖ¯½á¹¹Ê÷¿Ø¼þjsÌØÐ§</title>
+<meta name="Keywords" content="ÍøÓÑAdam¡®·ÖÏíÓÃAui-coreÊµÏÖÍ¼Æ¬·Å´ó¾µÔ¤ÀÀjsÌØÐ§,Jquery²å¼þ,JqueryÔ­´´,Jquery×ÊÔ´,JqueryÌØÐ§,jsÌØÐ§,div+css,JquerySchool," />
+<meta name="description" content="JquerySchoolÊÇÒ»¸ö×¨ÃÅ·ÖÏíjquery×ÊÔ´¡¢jquery²å¼þ¡¢jqueryÌØÐ§µÄÒ»¸öÍøÕ¾,ÍêÈ«¿ª·ÅÔ´´úÂë,°ÑÊµ¼Ê¿ª·¢ÖÐÓ¦ÓÃ×î¶à¡¢×îÊµÓÃµÄJquery×ÊÔ´³éÈ¡³öÀ´ÔÙ¼ÓÒÔ¾«ÐÄ±àÅÅ,ÈÃ¹ã´óÍøÓÑÄÜÒÔ×î¶ÌµÄÊ±¼ä¡¢»¨×îÉÙµÄ¾«Á¦È¥ÕæÕýÕÆÎÕjQuery¿ª·¢µÄÖªÊ¶¡£" />
+<script type="text/javascript" src="ECOTree.js"></script>
+<link type="text/css" rel="stylesheet" href="ECOTree.css" />
+<style>
+v\:*{ behavior:url(#default#VML);}
+</style>
+<style>
+	.copy {
+		font-family : "Verdana";				
+		font-size : 10px;
+		color : #CCCCCC;
+	}	
+</style>
+<script>
+var myTree = null;			
+function CreateTree() {
+	myTree = new ECOTree('myTree','myTreeContainer');	
+	myTree.config.colorStyle = ECOTree.CS_LEVEL;
+	myTree.config.nodeFill = ECOTree.NF_FLAT;
+	myTree.config.selectMode = ECOTree.SL_NONE;				
+	//ÊÇ·ñÔÊÐí¸ø½Úµã¼ÓÁ´½Ó£¬ÊÇ·ñÔÊÐí¸ø½Úµã¼ÓÍ¼Æ¬
+	myTree.config.useTarget = false;                
+	myTree.config.useImg = true;       
+
+¡¡¡¡//ÉèÖÃ½ÚµãµÄ´óÐ¡ºÍ¼ä¸ô
+	myTree.config.defaultNodeWidth = 95;
+	myTree.config.defaultNodeHeight = 140;
+	myTree.config.iSubtreeSeparation = 50;
+	myTree.config.iSiblingSeparation = 15;
+	myTree.config.iLevelSeparation = 30;
+
+	//´Ë´¦Í¨¹ý´ÓÊý¾Ý¿â»òÆäËüµØ·½¶ÁÈ¡½ÚµãÐÅÏ¢£¬Éú³ÉÌí¼Ó½ÚµãµÄ´úÂë
+	//²ÎÊýÇ°ÈýÎ»ÊÇ±ØÐëµÄ£»
+	//µÚÒ»Î»ÊÇ±¾½Úµãid£¬µÚ¶þÎ»ÊÇ¸¸½Úµãid¡¢¸ù½ÚµãµÄ¸¸½ÚµãÎª-1£¬µÚÈýÎ»Îª½ÚµãÎÄ±¾£»
+	//µÚËÄÎ»Îª½ÚµãÉÏÏÔÊ¾µÄÍ¼Æ¬/ÕÕÆ¬¡¢Í¼Æ¬·Åµ½imgÏÂ²¢ÔÚÊý¾Ý¿âÖÐ¼ÇÂ¼Ãû³Æ¼´¿É£¬Î´Éè²ÎÊýÔòÈ¡Ä¬ÈÏÍ¼Æ¬£»
+	//µÚÎåÎ»Îª³¬Á´½Ó¡¢×îºÃÊÇ·ÃÎÊÍ³Ò»³ÌÐò´«Èë±¾½Úµãid£»
+	//µÚÁù¡¢ÆßÎ»Îª½ÚµãµÄ¸öÐÔ»¯¿í¡¢¸ß¡£
+	myTree.add('01',-1,'×Ü²Ã','./img/0.jpg','http://www.jq-school.com');
+	
+	myTree.add('02','01','¼¼Êõ¸±×Ü²Ã','./img/1.jpg');
+	myTree.add('03','01','×Ü²ÃÖúÀí','./img/2.jpg','http://www.jq-school.com',95,130);
+	myTree.add('04','01','·Ö¹«Ë¾','./img/3.jpg','http://www.jq-school.com',95,130);
+
+	myTree.add('0201','02','¼¼Êõ¾­Àí','./img/4.jpg','http://www.jq-school.com',95,130);
+	myTree.add('0202','02','¼¼ÊõÔ±','./img/5.jpg','http://www.jq-school.com',95,130);
+	myTree.add('0301','03','ÃØÊé','./img/5.jpg','http://www.jq-school.com',95,130);
+	myTree.add('0302','03','ÖúÀí','./img/6.jpg','http://www.jq-school.com',95,130);
+	myTree.add('0401','04','×Ü¾­Àí','./img/6.jpg','http://www.jq-school.com',95,130);
+	myTree.add('0402','04','²ÆÎñ','./img/7.jpg','http://www.jq-school.com',95,130);
+
+	myTree.UpdateTree();
+}		
+
+</script>
+</head>
+<body onLoad="CreateTree();">
+<div id="myTreeContainer"></div>
+</body>
+</html>

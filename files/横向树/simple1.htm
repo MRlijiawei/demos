@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<title>ECOTree Simple Tree 1</title>
+		<script type="text/javascript" src="ECOTree.js"></script>
+		<link type="text/css" rel="stylesheet" href="ECOTree.css" />
+		<xml:namespace ns="urn:schemas-microsoft-com:vml" prefix="v"/>
+		<style>v\:*{ behavior:url(#default#VML);}</style> 
+		<style>
+			.copy {
+				font-family : "Verdana";				
+				font-size : 10px;
+				color : #CCCCCC;
+			}
+		</style>
+			
+		<script>
+			var myTree = null;
+			
+			function CreateTree() {
+				myTree = new ECOTree('myTree','myTreeContainer');	
+				myTree.config.linkType = 'B';
+myTree.config.iRootOrientation = ECOTree.RO_BOTTOM;                        
+myTree.config.topYAdjustment = -160;
+myTree.config.linkColor = "black";
+myTree.config.nodeColor = "#FFAAAA";
+myTree.config.nodeBorderColor = "black";
+myTree.config.useTarget = false;
+myTree.config.selectMode = ECOTree.SL_SINGLE;
+
+				myTree.add(0,-1,"");
+				myTree.add(1,0,"");
+				myTree.add(2,0,"");
+				myTree.UpdateTree();
+			}			
+		</script>			
+	</head>
+	<body onLoad="CreateTree();">
+		<div id="myTreeContainer">
+		</div>
+	</body>
+</html>
