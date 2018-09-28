@@ -1,0 +1,97 @@
+<body>
+<canvas id="canvas" width="200" style="position:absolute;right:19px;top:95px"></canvas>
+
+
+<script type="text/javascript">
+$("#header h1 small").html("<a style='text-transform: lowercase;' href='https://github.com/lwzhang'>Github：https://github.com/lwzhang</a>");
+</script><script type="text/javascript">
+$("#blog-news").prepend('<a href="http://home.cnblogs.com/u/xljzlw/"><img src="https://images.cnblogs.com/cnblogs_com/xljzlw/574255/o_300001295750131174054755371_950.jpg" width=180 height=180></a>');
+$("#profile_block").prepend("<a style='font-weight:bold' href='https://github.com/lwzhang'>Github：https://github.com/lwzhang</a><br><br>");
+$("#profile_block").prepend("<a style='font-weight:bold;font-size:20px' href='http://zlwis.me/'>个人独立博客：<br>http://zlwis.me</a><br><br>");
+
+		var Clock = function (canvas, options) {
+			this.canvas = canvas;
+			this.ctx = this.canvas.getContext("2d");
+			this.options = options;
+		};
+
+		Clock.prototype = {
+			constructor: Clock,
+			drawCircle: function () {
+				var ctx = this.ctx;
+				ctx.strokeStyle = "black";
+				ctx.arc(this.canvas.width / 2, this.canvas.height / 2, 60, 0, 2 * Math.PI, false);
+				ctx.stroke();
+			},
+			drawNum: function () {
+				var ctx = this.ctx;
+				var angle = Math.PI * 2 / 12;
+				for (var i = 1; i <= 12; i += 1) {
+					ctx.font = "20px Georgia";
+					ctx.textAlign = "center";
+					ctx.textBaseline = 'middle';
+					ctx.fillText(String(i), this.canvas.width / 2 + Math.cos(3 *Math.PI / 2 + angle * i) * 50, this.canvas.height / 2 + Math.sin(3 * Math.PI / 2 + angle * i) * 50);
+				}
+			},
+			drawPointer: function () {
+				var ctx = this.ctx;
+				var that = this;
+				var date, hour, minute, second;
+				date = new Date();
+				hour = date.getHours();
+				if (hour > 12) {
+					hour = hour % 12;
+				}
+				minute = date.getMinutes();
+				second = date.getSeconds();
+
+				var b = minute * Math.PI / 30;
+				var c = second * Math.PI / 30;
+				var a = hour * Math.PI / 6 + Math.PI / 6 * minute / 60;
+				var minuteAngle = Math.PI * 2 / 3600;
+				var secondAngle = Math.PI * 2 / 60;
+				var hourAngle = Math.PI * 2 / 12 / 3600;
+
+				ctx.beginPath();
+				ctx.save();
+				ctx.translate(that.canvas.width / 2, that.canvas.height / 2);
+				ctx.arc(0, 0, 3, 0, 2 * Math.PI, false);
+				ctx.fill();
+				ctx.closePath();
+				ctx.beginPath();
+				a += hourAngle;
+				ctx.rotate(a);
+				ctx.fillRect(-2, -26, 4, 36);
+				ctx.closePath();
+				ctx.beginPath();
+				b += minuteAngle;
+				ctx.rotate(b - a);
+				ctx.fillRect(-1.5, -35, 3, 45);
+				ctx.closePath();
+				ctx.beginPath();
+				c += secondAngle;
+				ctx.rotate(c - b);
+				ctx.fillRect(-1, -40, 2, 50);
+				ctx.closePath();
+				ctx.restore();
+			},
+			rePaint: function () {
+				this.drawPointer();
+				this.drawCircle();
+				this.drawNum();
+			},
+			tik: function () {
+				var that = this;
+				var ctx = this.ctx;
+				this.rePaint();
+				window.timer = setInterval(function () {
+					ctx.clearRect(0, 0, that.canvas.width, that.canvas.height);
+					that.rePaint();
+				}, 1000);
+			}
+		};
+
+		var options;
+		var clock = new Clock(document.getElementById("canvas"), options);
+		clock.tik();
+	</script><script type="text/javascript">getFollowStatus('40f3a698-a1bc-e311-8d02-90b11c0b17d6')</script></body>

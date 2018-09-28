@@ -1,4 +1,7 @@
 /* Header */
+body {
+	cursor: url('../img/bitbug_favicon.ico');
+}
 .large-header {
 	position: relative;
 	width: 100%;
