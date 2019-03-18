@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style type="text/css">
+    body {
+      font-weight: 400;
+      background-color: black;
+      text-align: center;
+    }
+    a {
+      font-size: 7em;
+      text-decoration: none;
+    }
+    p:nth-child(1) a {
+      color: #FF1177;
+    }
+    p:nth-child(1) a:hover {
+      color: white;
+      animation: ani1 1s ease-in-out infinite alternate;
+      -webkit-animation: ani1 1s ease-in-out infinite alternate;
+      -moz-animation: ani1 1s ease-in-out infinite alternate;
+    }
+    @keyframes ani1 {
+      from {
+        text-shadow: 0 0 10px #fff,0 0 20px #fff,0 0 30px #fff, 0 0 40px #ff1177, 0 0 70px #ff1177, 0 0 80px #ff1177, 0 0 150px #ff1177;
+      }
+      to {
+        text-shadow: 0 0 5px #fff,0 0 15px #fff,0 0 20px #fff, 0 0 30px #ff1177, 0 0 40px #ff1177, 0 0 50px #ff1177, 0 0 60px #ff1177;
+      }
+    }
+    @-webkit-keyframes ani1 {
+      from {
+        text-shadow: 0 0 10px #fff,0 0 20px #fff,0 0 30px #fff, 0 0 40px #ff1177, 0 0 70px #ff1177, 0 0 80px #ff1177, 0 0 150px #ff1177;
+      }
+      to {
+        text-shadow: 0 0 5px #fff,0 0 15px #fff,0 0 20px #fff, 0 0 30px #ff1177, 0 0 40px #ff1177, 0 0 50px #ff1177, 0 0 60px #ff1177;
+      }
+    }
+    @-moz-keyframes ani1 {
+      from {
+        text-shadow: 0 0 10px #fff,0 0 20px #fff,0 0 30px #fff, 0 0 40px #ff1177, 0 0 70px #ff1177, 0 0 80px #ff1177, 0 0 150px #ff1177;
+      }
+      to {
+        text-shadow: 0 0 5px #fff,0 0 15px #fff,0 0 20px #fff, 0 0 30px #ff1177, 0 0 40px #ff1177, 0 0 50px #ff1177, 0 0 60px #ff1177;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+  <p><a href="#">
+    RED
+  </a></p>
+</div>
+</body>
+</html>
