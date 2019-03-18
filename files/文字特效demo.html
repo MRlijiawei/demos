@@ -1,0 +1,154 @@
+<html>
+	<head>
+	    <meta charset="UTF-8">
+	    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<style>
+			body {
+				background-color: #02717e;
+			}
+			body marquee {
+				color: white;
+    			text-shadow: 0px 0px 20px #0cff18;
+			}
+			#projective {
+				color: #f00;
+				text-shadow: 1px 1px 0px #212121;    
+			}
+			#threed {
+				color: #fff;
+				text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,0.1), 0 0 5px rgba(0,0,0,0.1),0 1px 3px rgba(0,0,0,0.3),0 3px 5px rgba(0,0,0,0.2),0 5px 10px rgba(0,0,0,0.25);
+			}
+			#outLight {
+				color: #fff;
+				text-shadow: 0 0 5px #CCCCCC, 0 0 10px #CCCCCC, 0 0 15px #CCCCCC, 0 0 20px #095816, 0 0 25px #095816, 0 0 30px #095816, 0 0 50px #095816, 0 0 80px #095816, 0 0 100px #095816, 0 0 150px #095816;
+			}
+			#relief1 {
+				color: #222;
+				text-shadow: 0px 2px 3px #555;
+				background-color: #454545;
+			}
+			#relief2 {
+				color: #ccc;
+				text-shadow: -1px -1px #fff, 1px 1px #333;
+			}
+			#relief3 {
+				-webkit-background-clip: text;
+				-moz-background-clip: text;
+				background-color: #d6d2c1;
+				background-clip: text;
+				color: transparent;
+				text-shadow: 0 3px 3px rgba(255,255,255,0.5);
+			}
+			#fg {
+				color: transparent;
+				text-shadow: 0 0 5px #000;
+			}
+　　　　　　 #grunge {
+                position:relative;
+                color: #f06369;
+                background: #000;
+                text-shadow: 0 0 2px rgba(255,255,255,0.3), -1px -1px 0 #fcfcfc, 1px 1px 0 #ccc;
+            }
+            #grunge span {
+                position:absolute;
+                display:block;
+                top:0;
+                left:0;
+                height:100%;
+                width:100%;
+                background:url("http://www.w3cplus.com/sites/default/files/ground.png") no-repeat;
+            }
+            #cc {
+            	color: rgba(255, 179, 140,0.5);
+            	text-shadow: 3px 3px 0 rgba(180,255,0,0.5);
+            }
+            #picCont {
+            	background: url("http://www.w3cplus.com/sites/default/files/ground.png") no-repeat left top;
+            	-webkit-background-clip: text;
+            	-webkit-text-fill-color: transparent;
+            }
+
+            #h1 {
+                position: relative;
+                text-shadow: 1px 0 4px #006;
+                font-family: Airal;
+                }
+             #h1  a {
+                position: absolute;
+                top: 0; 
+                z-index: 2;
+                color: #f36902;
+                -webkit-mask-image: -webkit-gradient(linear, left top,left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+                text-descoration: none;
+                }
+             #h1:after {
+                content: "Gradient Effect";
+                color: #000;
+                text-shadow: 1px 1px 1px #600;
+            }
+			.bg { 
+			    background: #000;
+			    width: 1000px;
+			    height: 100px;
+			    margin: 0 auto;
+			}
+
+			.slideShine {
+			    width: 1000px;
+			    font-family: "Microsoft YaHei";
+			    font-size: 60px;
+			    text-align: center;
+
+			    background: #111 -webkit-linear-gradient(left, #111, #fff) 0 0 no-repeat;
+			    -webkit-background-size: 80px;
+
+			    -webkit-background-clip: text;
+			    -webkit-text-fill-color: rgba(255, 255, 255, 0.3);
+
+			    -webkit-animation: slideShine 3s infinite;
+			}
+
+			@-webkit-keyframes slideShine {
+			    0% {
+			        background-position: 0 0;
+			    }
+			    100% {
+			        background-position: 100% 100%;
+			    }
+			}
+		</style>
+    </head>
+    <body>
+    	<center>
+    		<h1>文字特效</h1>
+    		<p>1.走马灯</p>
+    		<marquee direction="right" behavior="alternate" scrollamount="5" scrolldelay="20" align="botton" bgcolor="#008f99">Up Down</marquee>
+    		<p>2.投影</p>
+    		<div id="projective">投影（projective）</div>
+    		<p>3.3D</p>
+    		<div id="threed">3D(three dimensional)</div>
+    		<p>4.外发光</p>
+    		<div id="outLight">外发光（external light emission)</div>
+    		<p>5.凹凸浮雕</p>
+    		<div id="relief1">浮雕（relief1）</div>
+    		<div id="relief2">浮雕（relief2）</div>
+    		<div id="relief3">浮雕（relief3）</div>
+    		<p>6.模糊</p>
+    		<div id="fg">模糊（frosted glass）</div>
+    		<p>7.纹理</p>
+    		<h2 id="grunge">Grunge Effect<span></span></h2>
+    		<p>8.补色</p>
+    		<div id="cc">补色（complementary colour）</div>
+    		<p>9.图片填充</p>
+    		<div id="picCont">图片填充（picture content）</div>
+    		<p>10.渐变</p>
+    		<h1 id="h1"><a href="#">Gradient Effect</a></h1>
+    		<p>11.扫光</p>
+    		<div class="bg">
+    			<p class="slideShine">Welcome</p>
+			</div>
+    	</center>
+    </body>
+</html>
