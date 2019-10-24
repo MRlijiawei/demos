@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>flex example</title>
+	<style type="text/css">
+		.p-box {
+			display: flex;
+			width: 500px;
+			height: 500px;
+
+		    flex-flow: row wrap-reverse;
+			background-color: #ababab;
+			/* justify-content: space-around; */
+		    /* justify-content: space-between; */
+		    align-content: center;
+		    align-items: baseline;
+		}
+		.p-box div {
+			color: white;
+			width: 100px;
+			margin: 10px;
+		}
+		.p-box div:nth-of-type(1) {
+			background-color: red;
+
+		    order: 3;
+   			flex-grow: 93;
+		}
+		.p-box div:nth-of-type(2) {
+		    flex-grow: 50;
+			order: 1;
+
+			background-color: orange;
+		}
+		.p-box div:nth-of-type(3) {
+			background-color: yellow;
+
+			flex-shrink: 67;
+		    flex-basis: 10px;
+		    align-self: center;
+		}
+		.p-box div:nth-of-type(4) {
+			flex-shrink: 11;
+
+			background-color: green;
+		}
+		.p-box div:nth-of-type(5) {
+			background-color: blue;
+		}
+		.p-box div:nth-of-type(6) {
+			background-color: purple;
+		}
+	</style>
+</head>
+<body>
+	<!-- 总结文档见reviseNote 2019.10 -->
+	<div class="p-box">
+		<div class="c-box">1</div>
+		<div class="c-box">22</div>
+		<div class="c-box">333</div>
+		<div class="c-box">4444</div>
+		<div class="c-box">55555</div>
+		<div class="c-box">666666</div>
+	</div>
+</body>
+</html>
