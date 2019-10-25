@@ -1,0 +1,93 @@
+/* @import '../../uni.scss'; */
+/* $uni-text-color-disable1: #c0c0c0; */
+.flex-center {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.common-footer {
+	color: #c0c0c0;
+	font-size: 15upx;
+	bottom: 2%;
+	position: absolute;
+}
+.go-top {
+	position: fixed;
+	bottom: 0.5em;
+	right: 1em;
+	border: 1px solid #b9b9b9;
+	text-align: center;
+}
+
+/* product */
+.uni-product-list {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.uni-product {
+    padding: 20upx;
+    display: flex;
+    flex-direction: column;
+}
+
+.image-view {
+    height: 330upx;
+    width: 330upx;
+	margin:12upx 0;
+}
+
+.uni-product-image {
+    height: 330upx;
+    width: 330upx;
+}
+
+.uni-product-title {
+    width: 300upx;
+    word-break: break-all;
+    display: -webkit-box;
+    overflow: hidden;
+	line-height:1.5;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.uni-product-price {
+	margin-top:10upx;
+    font-size: 28upx;
+	line-height:1.5;
+    position: relative;
+}
+
+.uni-product-price-original {
+    color: #e80080;
+}
+
+.uni-product-price-favour {
+    color: #888888;
+    text-decoration: line-through;
+    margin-left: 10upx;
+}
+
+.uni-product-tip {
+    position: absolute;
+    right: 10upx;
+    background-color: #ff3333;
+    color: #ffffff;
+    padding: 0 10upx;
+    border-radius: 5upx;
+}
+::-webkit-scrollbar {
+		width: 0;
+		height: 0;
+		background-color: transparent;
+	} 
+scrollbar {
+		width: 0;
+		height: 0;
+		background-color: transparent;
+	} 
