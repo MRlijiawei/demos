@@ -1,0 +1,40 @@
+<!-- div style="background:#fff url('https://images2018.cnblogs.com/blog/1348134/201808/1348134-20180809162905395-2105336004.gif') no-repeat;height:100px;width:100%;    background-size: cover;display:none"></div -->
+<script src="https://files.cnblogs.com/files/ljwsyt/shake.js"></script>
+<script src="https://files.cnblogs.com/files/ljwsyt/elastic-press.js"></script>
+<script src="https://files.cnblogs.com/files/ljwsyt/changeBack.js"></script>
+<link rel="stylesheet" type="text/css" href="https://files.cnblogs.com/files/ljwsyt/waifu.css">
+<link rel="stylesheet" type="text/css" href="https://files.cnblogs.com/files/ljwsyt/flat-ui.min.css"/>
+    <div class="waifu" id="waifu">
+        <div class="waifu-tips" style="opacity: 1;"></div>
+        <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+        <div class="waifu-tool">
+            <span class="fui-home"></span>
+            <span class="fui-chat"></span>
+            <span class="fui-eye"></span>
+            <span class="fui-user"></span>
+            <span class="fui-photo"></span>
+            <span class="fui-info-circle"></span>
+            <span class="fui-cross"></span>
+        </div>
+    </div>
+    <script src="https://files.cnblogs.com/files/ljwsyt/live2d.js"></script>
+    <script src="https://files.cnblogs.com/files/ljwsyt/waifu-tips.js"></script>
+<script type="text/javascript">
+function initWife(){
+if(typeof initModel === 'function'){
+initModel()
+}else{
+setTimeout(initWife,1000)
+}
+}
+initWife();
+</script>
+<link rel="stylesheet" href="https://files.cnblogs.com/files/ljwsyt/APlayer.min.css">
+<script src="https://files.cnblogs.com/files/ljwsyt/APlayer.min.js"></script>
+<div id="aplayer" class="aplayer"  data-id="2816437068" data-server="netease" data-type="playlist" data-fixed="true" data-listfolded="true" data-order="random" data-theme="#F58EA8"></div>
+<script src="https://files.cnblogs.com/files/ljwsyt/Meting.min.js"></script>
+<script src="https://files.cnblogs.com/files/ljwsyt/snow.js"></script>
+<script src="https://files.cnblogs.com/files/ljwsyt/snow2.js"></script>
+<script src="https://files.cnblogs.com/files/ljwsyt/magnet.js"></script>
+<script src="https://files.cnblogs.com/files/ljwsyt/effectionManager.js"></script>
+<!- iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=2816437068&auto=1&height=430"></iframe ->

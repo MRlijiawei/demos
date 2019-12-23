@@ -12,10 +12,8 @@ display: none;
     background-color: #629151;
     color: #fff;
 }
-canvas#live2dcanvas {
+canvas#live2d{
 border: 0 !important;
-width: 200px;
-height: 400px;
 background: none;
     left: 0;
 }
@@ -91,9 +89,9 @@ background-attachment: fixed;
 filter:alpha(opacity=90); -moz-opacity:0.9; -khtml-opacity: 0.9; opacity: 0.9;
     font-size: 16px;
 -webkit-transition: opacity 3s ease-in-out;
-    				-moz-transition: opacity 3s ease-in-out;
-    				-o-transition: opacity 3s ease-in-out;
-    				transition: opacity 3s ease-in-out;
+                    -moz-transition: opacity 3s ease-in-out;
+                    -o-transition: opacity 3s ease-in-out;
+                    transition: opacity 3s ease-in-out;
 
 }
 
@@ -104,18 +102,43 @@ filter:alpha(opacity=90); -moz-opacity:0.9; -khtml-opacity: 0.9; opacity: 0.9;
     }
 
 canvas {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	user-select: none;
-	background: #000;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    user-select: none;
+    background: #949494ad;
 }
 .toggleBackCls {
 float: right;
     margin-right: -400px;
     color: green;
+    cursor: pointer;
 }
-
+.toggleEff {
+float: right;
+    margin-right: -200px;
+    color: green;
+    cursor: pointer;
+}
+#effSelect{
+display:none;
+position:absolute;
+    z-index: 2;
+}
+#effSelect ul{
+border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.5);
+  background: #fff;
+}
+#effSelect ul li{
+padding:5px;
+cursor: pointer;
+border-radius: 4px;
+}
+#effSelect ul li:hover,#effSelect ul li.selected{
+background-color: #7fb758;
+color: #fff;
+}
 #hiddenAp {
 display:none;
     position: fixed;
@@ -174,4 +197,14 @@ audio::-webkit-media-controls {
 audio::-webkit-media-controls-enclosure {
 　　width: calc(100% + 32px);
 　　margin-left: auto;
+}
+#Snow{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    background: rgba(255,255,240,0.1);
+    pointer-events: none;
 }

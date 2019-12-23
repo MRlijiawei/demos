@@ -1,0 +1,26 @@
+<a href="https://github.com/MRlijiawei" target="_blank"><img style="position: fixed; top: 0; right: 0; border: 0; z-index: 1;" src="https://images.cnblogs.com/cnblogs_com/jackson0714/779808/o_github.png" ></a>
+<p style="font-size:8px;">若动画不显示，请查看地址栏首尾是否被浏览器拦截<p>
+<object type="application/x-shockwave-flash" style="outline:none;" data="http://cdn.abowman.com/widgets/hamster/hamster.swf?up_bodyColor=f0e9cc&amp;up_feetColor=D4C898&amp;up_eyeColor=000567&amp;up_wheelSpokeColor=DEDEDE&amp;up_wheelColor=FFFFFF&amp;up_waterColor=E0EFFF&amp;up_earColor=b0c4de&amp;up_wheelOuterColor=FF4D4D&amp;up_snoutColor=F7F4E9&amp;up_bgColor=F0E4E4&amp;up_foodColor=cba920&amp;up_wheelCenterColor=E4EB2F&amp;up_tailColor=E6DEBE&amp;" width="200" height="160">
+<param name="movie" value="http://cdn.abowman.com/widgets/hamster/hamster.swf?up_bodyColor=f0e9cc&amp;up_feetColor=D4C898&amp;up_eyeColor=000567&amp;up_wheelSpokeColor=DEDEDE&amp;up_wheelColor=FFFFFF&amp;up_waterColor=E0EFFF&amp;up_earColor=b0c4de&amp;up_wheelOuterColor=FF4D4D&amp;up_snoutColor=F7F4E9&amp;up_bgColor=F0E4E4&amp;up_foodColor=cba920&amp;up_wheelCenterColor=E4EB2E&amp;up_tailColor=E6DEBE&amp;">
+<param name="AllowScriptAccess" value="always">
+<param name="wmode" value="opaque"></object>
+<p style="color: #3E8BD6;font-size: 9pt;">主人说：喜欢的大佬可以点个关注</p>
+<p id="showAp">万水千山总是情，领个红包行不行</p>
+<div id="hiddenAp"><img id="apImg" src="https://images2018.cnblogs.com/blog/1348134/201808/1348134-20180815145319467-101544305.jpg"><button id="hideAp">关闭</button></div>
+<div id="bgloading"></div>
+<div id="mp3LjwSyt"></div>
+<script>
+$("#showAp").click(function(){
+$("#bgloading").show();
+$("#hiddenAp").show();
+})
+$("#hideAp").click(function(){
+$("#hiddenAp").hide();
+$("#bgloading").hide();
+})
+//var mp3Str = '<audio controls="" autoplay="" name="media" controls="controls" controlsList="nodownload" oncontextmenu="return false"><source src="http://yishuifengxiao.oss-cn-hangzhou.aliyuncs.com/9eceaed159e648468f3281cc693a5533.mp3?Expires=1594458611&OSSAccessKeyId=LTAIfNrtCWdgIxhW&Signature=zgdPHJR%2FK9UuPqFdi%2Bhex4U%2F%2BXg%3D" type="audio/mpeg"></audio>'
+//$("#mp3LjwSyt").empty().append(mp3Str)
+</script>
+<script src="https://files.cnblogs.com/files/ljwsyt/heart-press.js"></script>
+<script src="https://files.cnblogs.com/files/ljwsyt/catalogue-press.js"></script>
+<script src="https://files.cnblogs.com/files/ljwsyt/gotop-press.js"></script>
