@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>吸顶容器</title>
+  <style>
+    .body {
+      margin: 0px !important;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .road-tab-fixed {
+      position: fixed;
+      top: 0%;
+      width: 100%;
+    }
+
+    .top {
+      background: #c4f8b4;
+      height: 50px;
+    }
+
+    .list {
+      background: #ccc;
+      width: 100%;
+    }
+
+    .list li {
+      height: 50px;
+      border-bottom: 2px solid #f00;
+    }
+
+    .banner {
+      width: 100%;
+      background: #c19aff;
+      height: 150px;
+    }
+    .flag {
+      width: 30px;
+      height: 40px;
+      background-color: red;
+      position: relative;
+    }
+    .flag:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -20px;
+      border: 15px solid #fff;
+      transform: rotate(45deg);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cont">
+    <div class="banner">这是广告图</div>
+    <div class="top" id="road-tab">菜单</div>
+    <div class="list">
+      <ul>
+        <li>0</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>0</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+      </ul>
+    </div>
+    <div class='flag'>flag</div>
+  </div>
+  <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+  <script>
+    const fixedDom = $("#road-tab"),
+      tabclass = "road-tab-fixed";
+    let beforeElementScrollTop = 0;
+    let beforeOffsetTop = fixedDom[0].offsetTop;
+    //scroll节流
+    const throttle = (func, wait, mustRun) => {
+      var timeout,
+        startTime = new Date();
+
+      return function () {
+        var context = this,
+          args = arguments,
+          curTime = new Date()
+        clearTimeout(timeout)
+        // 如果达到了规定的触发时间间隔，触发 handler
+        if (curTime - startTime >= mustRun) {
+          beforeElementScrollTop = document.documentElement.scrollTop
+          console.log("beforelementScrollTop----------", document.body.scrollTop);
+          func.apply(context, args);
+          startTime = curTime
+          // 没达到触发间隔，重新设定定时器
+        } else {
+          timeout = setTimeout(func, wait)
+        }
+      }
+    }
+    const winScroll = (e) => {
+      const elementScrollTop = document.documentElement.scrollTop
+      console.log('elementScrollTop--------------', elementScrollTop);
+      if (beforeElementScrollTop - elementScrollTop <= 0) {//up
+        console.log('up');
+        if (beforeOffsetTop - elementScrollTop < 0) {
+          fixedDom.addClass("road-tab-fixed")
+        }
+      } else {
+        if (beforeOffsetTop - elementScrollTop >= 0) {
+          console.log("UUUUUU");
+          fixedDom.removeClass("road-tab-fixed")
+        }
+      }
+    };
+    $(window).off("scroll").on("scroll", throttle(winScroll, 10, 100));
+  </script>
+</body>
+</html>
