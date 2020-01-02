@@ -1,5 +1,27 @@
+body {
+    cursor: url("https://files.cnblogs.com/files/ljwsyt/mouse.ico"),default;
+}
 #mainContent{
 width:900px;
+}
+#link2git img {
+width:100px;
+}
+.flag {
+width: 30px;
+    height: 40px;
+    background-color: red;
+position: fixed; 
+top: 0; 
+right: 110px; 
+}
+.flag:after {
+content: '';
+    position: absolute;
+    left: 0;
+    bottom: -20px;
+    border: 15px solid #fff;
+    transform: rotate(45deg);
 }
 #cnblogs_post_body ul {
     overflow: auto;
