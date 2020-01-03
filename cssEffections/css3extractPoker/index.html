@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>css3高度灵活的模拟扑克牌切换图片效果</title>
+<link rel="stylesheet" href="css/kort.css">
+</head>
+<body>
+		<h2>Default</h2>
+		<div class="thumb kort">
+			<img src="images/lanren1.jpg" width="200" height="200">
+			<img src="images/lanren2.jpg" width="200" height="200">
+			<img src="images/lanren3.jpg" width="200" height="200">
+			<img src="images/lanren4.jpg" width="200" height="200">
+			<img src="images/lanren5.jpg" width="200" height="200">
+			<img src="images/lanren6.jpg" width="200" height="200">
+			<img src="images/lanren7.jpg" width="200" height="200">
+			<img src="images/lanren8.jpg" width="200" height="200">
+			<img src="images/lanren9.jpg" width="200" height="200">
+		</div>
+
+		<h2>Concave</h2>
+		<div class="thumb kort concave">
+			<img src="images/lanren1.jpg" width="200" height="200">
+			<img src="images/lanren2.jpg" width="200" height="200">
+			<img src="images/lanren3.jpg" width="200" height="200">
+			<img src="images/lanren4.jpg" width="200" height="200">
+			<img src="images/lanren5.jpg" width="200" height="200">
+			<img src="images/lanren6.jpg" width="200" height="200">
+			<img src="images/lanren7.jpg" width="200" height="200">
+			<img src="images/lanren8.jpg" width="200" height="200">
+			<img src="images/lanren9.jpg" width="200" height="200">
+		</div>
+
+		<h2>Stack</h2>
+		<div class="thumb kort stack">
+			<img src="images/lanren1.jpg" width="200" height="200">
+			<img src="images/lanren2.jpg" width="200" height="200">
+			<img src="images/lanren3.jpg" width="200" height="200">
+			<img src="images/lanren4.jpg" width="200" height="200">
+			<img src="images/lanren5.jpg" width="200" height="200">
+			<img src="images/lanren6.jpg" width="200" height="200">
+			<img src="images/lanren7.jpg" width="200" height="200">
+			<img src="images/lanren8.jpg" width="200" height="200">
+			<img src="images/lanren9.jpg" width="200" height="200">
+		</div>
+		<script src="js/kort.js"></script>
+		<script>
+			// FF OS X animates this at 3-4 FPS when there are box-shadows
+			// on the images, hence the hack... Ugh :/
+			if( navigator.userAgent.match( /firefox/gi ) ) {
+				[].slice.call( document.querySelectorAll( '.thumb img' ) ).forEach(function( el ) { el.style.boxShadow = 'none'; });
+			}
+		</script>
+</body>
+</html>
