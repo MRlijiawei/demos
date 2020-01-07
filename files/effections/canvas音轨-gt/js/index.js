@@ -125,7 +125,7 @@ SW.start();
 
 var range = document.getElementById('range');
 setInterval(function(){
-	// SW.setNoise(range.value);
-	SW.setNoise(0.3);
+	SW.setNoise(range.value);
+	// SW.setNoise(0.3);
 }, 100);
 

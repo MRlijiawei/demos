@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<style type="text/css">
+			body{
+				background-color: #FFFFFF;
+			}
+			.out{
+				overflow: hidden;
+				height: 21px;
+				margin-top: 50px;
+				padding-left: 20px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="out" id="roll">
+			<div>111111111</div>
+			<div>222222222</div>
+			<div>333333333</div>
+			<div>44444444444</div>
+		</div>
+		
+		<script type="application/javascript">
+			var speed = 50;
+			var delay = 1000;
+			var height = 21;
+			var time;
+			window.onload = function(){
+				var area = document.getElementById("roll");
+				// 将元素复制一遍，结合下边滚动到0，以使得看起来都是连续的往上滚动
+				area.innerHTML += area.innerHTML;
+				function scroll(){
+					if(area.scrollTop % height == 0){
+						clearInterval(time);
+						setTimeout(start,delay);
+					}else{
+						area.scrollTop++;
+						if(area.scrollTop >= area.scrollHeight/2){
+							area.scrollTop = 0;
+						}
+					}
+					
+				}
+				function start(){
+					time = setInterval(scroll,speed);
+					area.scrollTop++;
+				}
+				setTimeout(start,delay);
+			}
+		</script>
+	</body>
+
+</html>
+
+ 

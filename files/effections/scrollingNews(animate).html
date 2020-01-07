@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		<style type="text/css">
+			body{
+				background-color: #FFFFFF;
+			}
+			li{ list-style-type: none; }
+		</style>
+	</head>
+
+	<body>
+		<div id="broadcast" class="bar" name="giftactive">
+		  <div style="float:left"><strong>间隔滚动效果：</strong></div>
+		  <div id="demo" style="overflow:hidden;height:22px;line-height:22px;">
+		    <ul class="mingdan" id="holder">
+		      <li><a href="#" target="_blank">aaaaaa</a></li>
+		      <li><a href="#" target="_blank">bbbbbb</a></li>
+		      <li><a href="#" target="_blank">cccccc</a></li>
+		      <li><a href="#" target="_blank">dddddd</a></li>
+		      <li><a href="#" target="_blank">eeeeee</a></li>
+		    </ul>
+		  </div>
+		</div>
+		
+		<script type="application/javascript">
+			var speed = 500;
+			var delay = 1000;
+			var height = 22;
+			var time;
+			function AutoScroll(obj) {
+			    $(obj).find("ul:first").animate({
+			        marginTop: `-${height}px`
+			    },
+			    speed,
+			    function() {
+			        $(this).css({
+			            marginTop: "0px"
+			        }).find("li:first").appendTo(this);// 滚动到顶后将其移到底部
+			    });
+			}
+			$(document).ready(function() {
+			    time = setInterval('AutoScroll("#demo")', delay)
+			});
+		</script>
+	</body>
+
+</html>
+
+ 
