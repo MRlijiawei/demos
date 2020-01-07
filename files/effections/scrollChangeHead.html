@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>滚动切换头部--仿简书</title>
+	<style type="text/css">
+		* {
+			margin:0;
+			padding: 0;
+			transition: all 1s;
+		}
+		body {
+			background: #f0f0f0;
+			text-align: center;
+		}
+		header, footer {
+			height: 56px;
+			width: 100%;
+		}
+		.header {
+			position: fixed;
+			top:0;    left: 0;
+    right: 0;
+    		overflow: hidden;
+			background-color: #fff;
+			box-shadow: 0 2px 10px rgba(0,0,0,0.5)
+		}
+		.header-content, .footer-content, .header-inner-content, .foot-inner-content {
+			height: 56px;
+			width: 100%;
+			z-index: 100;
+			    margin-left: auto;
+    margin-right: auto;
+		}
+		.header-inner-content, .foot-inner-content {
+			width: 1400px;
+		}
+		.header-inner-content div, .foot-inner-content div {
+			align-items: center;
+		    display: flex;
+		    height: 56px;
+		}
+		.header-left {
+			float: left;
+		}
+		.header-right {
+			float: right;
+		}
+		.second-head {
+			position: absolute;
+			top: 0;
+    		left: 0;
+    		transform: translateY(100%)
+		}
+		.head-show {
+		    transform: translateY(-100%);
+		}
+		.footer {
+			position: fixed;
+			bottom: 0;
+			    left: 0;
+    right: 0;
+			background-color: #fff;
+			box-shadow: 0 -2px 10px rgba(0,0,0,0.5)
+		}
+
+		.content {
+		min-height: 2000px;width: 1400px;
+			display: flex;justify-content: center;align-items: flex-start;
+			    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 0;
+		}
+		.content-item {
+			background-color: #fff;
+			width: 100%;min-height: 2000px;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<header>
+			<div class="header">
+				<div class="header-content first-head">
+					<div class="header-inner-content">
+						<div class="header-left">Header</div>
+						<div class="header-right">Login/Info</div>
+					</div>
+				</div>
+				<div class="header-content second-head">
+					<div class="header-inner-content">
+						<div class="header-left">Title</div>
+						<div class="header-right">Author</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<div>
+			<div class="content">
+				<div class="content-item">Content</div>
+			</div>
+		</div>
+		<footer>
+			<div class="footer">
+				<div class="footer-content">
+					<div class="foot-inner-content">
+						<div>FooterFooterFooterFooterFooterFooterFooterFooterFooterFooter</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<script type="application/javascript">
+		var start,end,timeStart,timeEnd,delay = 300
+		window.onload = function() {
+			document.body.onscroll = /*function() {
+				timeStart = setTimeout(checkScroll('start'), 0)
+				timeEnd = setTimeout(checkScroll('end'), 100)
+			}*/throttle(checkScroll, delay)
+		}
+		/* 节流 */
+	    function throttle(func, wait) {
+	        var previous = 0;
+	        return function () {
+	            var now = +new Date();
+	            if (now - previous > wait) {
+	                func.apply(this, arguments);
+	                previous = now;
+	            }
+	        }
+	    }
+	    function checkScroll() {
+	    	start = document.scrollingElement.scrollTop
+	    	setTimeout(()=>{
+	    		end = document.scrollingElement.scrollTop
+	    		if (end > start) {
+					document.getElementsByClassName('first-head')[0].style.transform = 'translateY(-100%)'
+					document.getElementsByClassName('second-head')[0].style.transform = 'translateY(0)'
+				} else {
+					document.getElementsByClassName('first-head')[0].style.transform = 'translateY(0)'
+					document.getElementsByClassName('second-head')[0].style.transform = 'translateY(100%)'
+				}
+	    	}, 50)
+	    }
+	</script>
+</body>
+</html>
