@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>懒加载（intersectionObserver）</title>
+	<style>
+		img {
+			width: 100%;
+			height: 500px;
+			transition: all .7s ease 0s;
+			transform: translateZ(0) scale(1) rotate(45deg);
+		}
+	</style>
+</head>
+<body>
+	<img src="" lazy-src="http://img5.imgtn.bdimg.com/it/u=2272234387,1362982618&fm=15&gp=0.jpg">
+	<img src="" lazy-src="http://img3.imgtn.bdimg.com/it/u=2324071301,35284414&fm=26&gp=0.jpg">
+	<img src="" lazy-src="http://img1.imgtn.bdimg.com/it/u=217566573,3701998084&fm=26&gp=0.jpg">
+	<img src="" lazy-src="http://img2.imgtn.bdimg.com/it/u=1852703350,482571544&fm=26&gp=0.jpg">
+	<img src="" lazy-src="http://img3.imgtn.bdimg.com/it/u=2139599581,2633176806&fm=26&gp=0.jpg">
+</body>
+<script type="text/javascript">
+	let imgList = [...document.querySelectorAll('img')]
+	let lazyLoad = (() => {
+		// 实例化观察者
+		let observer = new IntersectionObserver(entries => {
+			// 观察配置
+			entries.forEach(entry => {
+				if (entry.intersectionRatio > 0) {
+					entry.target.src = entry.target.getAttribute('lazy-src')
+					// 动画，仿https://creddy.ru/
+					entry.target.style.transform = 'translateZ(0) scale(1) rotate(0deg)'
+					// 取消观察
+					observer.unobserve(entry.target)
+				}
+			})
+		})
+		imgList.forEach(img => {
+			observer.observe(img)
+		})
+	})
+	lazyLoad()
+</script>
+</html>
