@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/three.js/92/three.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/tween.js/r14/Tween.min.js"></script>
+</head>
+<style>
+    html,
+    body{
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    #jump{
+        width: 100%;
+        height: 100%;
+    }
+    .score{
+        width: 200px;
+        height: 100px;
+        background-color: rgba(0,0,0,0.4);
+        position: absolute;
+        top: 0;
+        left: 0;
+	pointer-events: none;
+    }
+    .gameOver{
+        display: none;
+        color: brown;
+        position: absolute;
+        text-align: center;
+        margin: 0 auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+	pointer-events: none;
+    }
+</style>
+<body>
+    <div id="jump"></div>
+    <div class="score">
+        当前获得：<span id='score'>0</span> 分
+    </div>
+    <div class='gameOver'>
+        <h2> GAME OVER</h2>
+    </div>
+</body>
+<script>
+    let size = {
+        width: $('#jump').width(),
+        height: $('#jump').height()
+    }
+    let boxHeight = 6
+    let score = 0
+    let clickable = true
+    let bound = {
+        y1: 0,
+        y2: 0,
+        x1: 0,
+        x2: 0
+    }
+    let originPos = new THREE.Vector3(-20, 20, 0)
+    let randomFlag
+    let atPos = new THREE.Vector3()
+    let loadNum = 1
+    let pushTime, offsetDis
+    let clickTime = new THREE.Clock()
+    let timer =  new THREE.Clock()
+
+    let scene = new THREE.Scene()
+    let camera = new THREE.PerspectiveCamera(45, size.width / size.height, 0.1, 10000)
+    camera.position.set(-80,60,100)
+    camera.lookAt(scene.position)
+    let renderer = new THREE.WebGLRenderer({
+        antialias: true
+    })
+    renderer.setSize(size.width, size.height)
+    renderer.setPixelRatio(window.devicePixelRatio)     //  对手机优化//防止canvas模糊输出
+    renderer.setClearColor(0xffffff)
+    renderer.shadowMap.enabled = true
+    $('#jump').append(renderer.domElement)
+
+
+    let cy = new THREE.Group()
+    let cyGeo = new THREE.CylinderGeometry(1,1.5,boxHeight)
+    let cyMat = new THREE.MeshPhongMaterial({
+        color: 0x00CED1
+    })
+    let cybot = new THREE.Mesh(cyGeo, cyMat)
+    let temp = new THREE.Vector3()
+    cybot.castShadow = true
+    cy.add(cybot)
+    temp.set(originPos.x, originPos.y + boxHeight, originPos.z)
+    let sph = new THREE.Mesh(new THREE.SphereGeometry(1), cyMat)
+    sph.position.set(0,boxHeight, 0)
+    sph.castShadow = true
+    cy.add(sph)
+    cy.position.copy(temp)
+
+
+    let light = new THREE.DirectionalLight(0xffffff)
+    light.position.copy(new THREE.Vector3(100, 100, 100))
+    light.castShadow = true
+    light.shadowCameraNear = 2
+    light.shadowCameraFar = 200
+    light.shadowCameraLeft = -100
+    light.shadowCameraRight = 100
+    light.shadowCameraTop = 100
+    light.shadowCameraBottom = -20
+    light.target = cy
+    scene.add(light)
+
+
+    const onResize = () => {
+      camera.aspect = $('#jump').width() / $('#jump').height()
+      camera.updateProjectionMatrix()
+      renderer.setSize($('#jump').width(), $('#jump').height())
+    }
+
+    window.addEventListener('resize', onResize, false)
+
+
+    let boxGeo = new THREE.BoxGeometry(12,boxHeight, 12)
+    let boxMat = new THREE.MeshPhongMaterial({
+        color: 0xFFC0CB
+    })
+    let box = new THREE.Mesh(boxGeo, boxMat)
+    box.receiveShadow = true
+    box.castShadow = true
+    box.position.copy(originPos)
+    scene.add(box)
+
+
+    // let axis = new THREE.AxisHelper(100)
+    // scene.add(axis)
+    // let box1 = box.clone()
+    // box1.position.set(-20, 0, 0)
+    // scene.add(box1)
+    // let box2 = box.clone()
+    // box2.position.set(20, 0,0)
+    // scene.add(box2)
+    // let box3 = box.clone()
+    // box3.position.set(0, 0, -20)
+    // scene.add(box3)
+
+
+    const addRandomBox = async(random = Math.random()) => {// 通过random控制盒子是前边添加还是左边添加
+        randomFlag = random  < 0.5? true: false
+        offsetDis = 10 + Math.random() * 30
+        let randomPos = new THREE.Vector3()
+        atPos.copy(originPos)
+        if(randomFlag){ //  往前
+            randomPos.set(originPos.x + offsetDis, originPos.y, originPos.z)
+        }else{  //  往左
+            randomPos.set(originPos.x, originPos.y, originPos.z - offsetDis)
+        }
+        let radomBox = box.clone()
+        bound.x1 = randomPos.x - 6
+        bound.x2 = randomPos.x + 6
+        bound.y1 = randomPos.z - 6
+        bound.y2 = randomPos.z + 6
+        radomBox.position.copy(randomPos)
+        scene.add(radomBox)
+        await dropAni(radomBox)
+        
+        originPos.copy(randomPos)
+    }
+
+    const dropAni = (box,time = 800) => {//  降落动画
+        return new Promise((resolve, reject) => {
+            let {x, y, z} = box.position
+            new TWEEN.Tween({x, y, z})
+            .to({x: x, y: y - 20, z}, time)
+            .onUpdate(function(){
+                box.position.set(this.x, this.y, this.z)
+                clickable = false
+            })
+            .onComplete(() => {
+                resolve()
+                clickable = true
+            })
+            .start()
+        })
+    }
+
+
+    const addRole = async() => { //添加角色
+        scene.add(cy)
+        await dropAni(cy, 500)
+    }
+   const loadControl = () => {//  控制第一次往前添加，之后的随机
+       if(loadNum > 1){
+           addRandomBox()
+       }else{
+           addRandomBox(0.3)  //保证向前
+       }
+       loadNum ++
+   }
+
+    const originSpeed = async (pushTime, randomFlag) => {//根据按压时长确定初始速度
+        let speed = {
+            xV: pushTime * 50,// 水平位移
+            yV: pushTime * 20//sin模拟，抛物线懒得写
+        }
+        await move(speed, randomFlag)
+    }
+
+    const move = (speed, randomFlag) => {//传入初始速度开始动画
+        return new Promise((resolve, reject) => {
+            let {xV, yV} = speed
+            let {x, y, z} = cy.position
+            let a = camera.position.x
+            let b = camera.position.y
+            let c = camera.position.z
+            new TWEEN.Tween({ t: 0})
+            .to({t: 1}, 1000)
+            .onUpdate(function(){
+                clickable = false
+                if(randomFlag){
+                    cy.position.set(x + xV * this.t, y + yV * Math.sin( this.t * Math.PI), z)
+                    camera.position.set(a + xV * this.t, b + yV * Math.sin( this.t * Math.PI), c)
+                }else{
+                    cy.position.set(x, y + yV * Math.sin( this.t * Math.PI), z  - xV * this.t)
+                    camera.position.set(a, b + yV * Math.sin( this.t * Math.PI), c  - xV * this.t)
+                }
+            })
+            .onComplete(() => {
+                resolve()
+                let pos = cy.position
+                if(pos.x < bound.x2 && pos.x > bound.x1 && pos.z < bound.y2 && pos.z > bound.y1){
+                    score ++
+                    $('#score').text(score)
+                    loadControl()
+                    clickable = true
+                }else{
+                    console.log('game over')
+                    $('.gameOver').show()
+                    $('.score').hide()
+                }
+
+                // if(yV > offsetDis + 6){
+                //     console.log('game over')
+                //     $('.gameOver').show()
+                // }else {
+                //     loadControl()
+                // }
+            })
+            .start()
+        })
+        
+    }
+
+
+    const mouseDown = (e) => {
+        e.stopPropagation()
+        e.preventDefault()
+        clickTime.getDelta()
+        console.log('down time is s%', +new Date())
+    }
+    const mouseUp = (e) => {
+        e.stopPropagation()
+        e.preventDefault()
+        if(!clickable) return
+        pushTime = clickTime.getDelta()
+        let offbeg = cy.position
+        console.log(pushTime * 1000)
+        console.log('up time is s%', +new Date())
+        console.log(randomFlag)
+        originSpeed(pushTime, randomFlag)
+    }
+    window.addEventListener('mousedown', mouseDown, false)
+    window.addEventListener('touchstart', mouseDown, false)
+    window.addEventListener('mouseup', mouseUp, false)
+    window.addEventListener('touchend', mouseUp, false)
+    window.addEventListener('contextmenu', function(e){
+    e.preventDefault();
+    })
+
+    const render = () => {
+        renderer.render(scene,camera)
+        requestAnimationFrame(render)
+        TWEEN.update()
+    }
+    render()
+
+    const load = async() => {//  加载完成统一执行
+        await dropAni(box)
+        addRole()
+        loadControl()
+    }
+
+    window.onload = load
+
+</script>
+</html>
