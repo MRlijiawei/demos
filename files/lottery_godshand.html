@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>幸运大转盘</title>
+  <style>
+    * { /* 重置默认样式 */
+      margin: 0;
+      padding: 0;
+      border: none;
+      outline: none;
+      user-select: none;
+    }
+    .wrapper {
+      position: relative;
+      height: 200px;
+      width: 200px;
+      padding: 20px;
+      margin: 20px;
+      background-color: #ff5555;
+      box-shadow: #000000 0px 0px 10px;
+      border-radius: 50%;
+    }
+    .light {
+      position: absolute;
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      top: 5px;
+      left: 115px;
+      transform-origin: 5px 115px;
+    }
+    .light-twinkling {
+      animation: 1s twinkling 3, 100ms 3s twinkling 3;
+    }
+    .light:nth-child(2n) {
+      background-color: #fafce7;
+    }
+    .light:nth-child(2n+1) {
+      background-color: #ffe58b;
+    }
+    .light:nth-child(2) {
+      transform: rotate(36deg);
+    }
+    .light:nth-child(3) {
+      transform: rotate(72deg);
+    }
+    .light:nth-child(4) {
+      transform: rotate(108deg);
+    }
+    .light:nth-child(5) {
+      transform: rotate(144deg);
+    }
+    .light:nth-child(6) {
+      transform: rotate(180deg);
+    }
+    .light:nth-child(7) {
+      transform: rotate(216deg);
+    }
+    .light:nth-child(8) {
+      transform: rotate(252deg);
+    }
+    .light:nth-child(9) {
+      transform: rotate(288deg);
+    }
+    .light:nth-child(10) {
+      transform: rotate(324deg);
+    }
+    .panel {
+      position: relative;
+      height: 200px;
+      width: 200px;
+      background-color: #b7b7b7;
+      border-radius: 100px;
+    }
+    .sector {
+      position: absolute;
+      left: 100px;
+      top: 0px;
+      width: 100px;
+      height: 200px;
+      font-size: 14px;
+      border-radius: 0px 100px 100px 0;
+      overflow: hidden;
+      transform-origin: left center;
+    }
+    .sector:nth-child(1) {
+      transform: rotate(-18deg);
+    }
+    .sector:nth-child(2) {
+      transform: rotate(18deg);
+    }
+    .sector:nth-child(3) {
+      transform: rotate(54deg);
+    }
+    .sector:nth-child(4) {
+      transform: rotate(90deg);
+    }
+    .sector:nth-child(5) {
+      transform: rotate(126deg);
+    }
+    .sector:nth-child(6) {
+      transform: rotate(162deg);
+    }
+    .sector:nth-child(7) {
+      transform: rotate(198deg);
+    }
+    .sector:nth-child(8) {
+      transform: rotate(234deg);
+    }
+    .sector:nth-child(9) {
+      transform: rotate(270deg);
+    }
+    .sector:nth-child(10) {
+      transform: rotate(306deg);
+    }
+    .sector:nth-child(2n+1) .sector-inner {
+      background: #fef6e0;
+    }
+    .sector:nth-child(2n) .sector-inner {
+      background: #ffffff;
+    }
+    .sector-inner {
+      text-align: center;
+      display: block;
+      width: 40px;
+      padding: 5px 3px 0 57px;
+      height: 195px;
+      transform: translateX(-100px) rotate(36deg);
+      transform-origin: right center;
+      border-radius: 100px 0 0 100px;
+    }
+    .sector-inner span {
+      display: block;
+      transform-origin: center;
+      transform: rotate(-19deg);
+      color: #d46854;
+    }
+    .pointer {
+      position: absolute;
+      left: 79px;
+      top: 79px;
+      z-index: 10;
+      height: 30px;
+      width: 30px;
+      padding: 6px;
+      color: #fff899;
+      line-height: 15px;
+      font-size: 12px;
+      text-align: center;
+      background-color: #ff5350;
+      border-radius: 50%;
+      border: 1px solid #ff5350;
+      transition: transform 3s cubic-bezier(.2,.93,.43,1);
+    }
+    .pointer::after {
+      content: '';
+      position: absolute;
+      left: 14px;
+      top: -24px;
+      border-width: 12px 6px;
+      border-style: solid;
+      border-color: transparent;
+      border-bottom-color: #ff5350;
+      transform-origin: center;
+    }
+    .result {
+      margin: 20px 60px;
+    }
+
+    @keyframes twinkling {
+      50% { background: transparent; }
+    }
+</style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="panel">
+      <div id="lotcontent"></div>
+      <!-- <div class="sector">
+        <div class="sector-inner">
+          <span>谢谢参与</span>
+        </div>
+      </div>
+      <div class="sector">
+        <div class="sector-inner">
+          <span> 5 0 积分</span>
+        </div>
+      </div>
+      <div class="sector">
+        <div class="sector-inner">
+          <span>谢谢参与</span>
+        </div>
+      </div>
+      <div class="sector">
+        <div class="sector-inner">
+          <span>100元话费</span>
+        </div>
+      </div>
+      <div class="sector">
+        <div class="sector-inner">
+          <span> 5 0 积分</span>
+        </div>
+      </div>
+      <div class="sector">
+        <div class="sector-inner">
+          <span>谢谢参与</span>
+        </div>
+      </div>
+      <div class="sector">
+        <div class="sector-inner">
+          <span>100元话费</span>
+        </div>
+      </div>
+      <div class="sector">
+        <div class="sector-inner">
+          <span>谢谢参与</span>
+        </div>
+      </div>
+      <div class="sector">
+        <div class="sector-inner">
+          <span> 5 0 积分</span>
+        </div>
+      </div>
+      <div class="sector">
+        <div class="sector-inner">
+          <span>10元话费</span>
+        </div>
+      </div> -->
+      <div class="pointer">开始抽奖</div>
+    </div>
+  </div>
+  <div class="result"></div>
+</body>
+  <script>
+    // 改成彩虹——TODO
+    // 角度做成参数——TODO
+    let getEle = document.getElementsByClassName.bind(document);
+    let pointer = getEle('pointer')[0];
+    let result = getEle('result')[0];
+    let lights = Array.prototype.slice.call(getEle('light'));
+
+    let onRotation = false; // 记录当前是否正在旋转，如果正在旋转，就不能继续点击了
+    // let reward = ['谢谢参与', '50积分', '谢谢参与', '100元话费', '50积分', 
+    // '谢谢参与', '100元话费', '谢谢参与', '50积分', '10元话费'];
+    // 人工控制概率--begin
+    let reward = [{
+      text: '北京一环别墅',
+      probability: 0,
+      canbe: false
+    },{
+      text: '三亚海景别墅',
+      probability: 0.1,
+      canbe: false
+    },{
+      text: '祝君下次中奖',
+      probability: 1,
+      canbe: true
+    },{
+      text: '100亿现金',
+      probability: 1,
+      canbe: false
+    },{
+      text: '谢谢参与',
+      probability: 1,
+      canbe: true
+    },{
+      text: '劳斯莱斯幻影',
+      probability: 1,
+      canbe: false
+    },{
+      text: '五菱宏光',
+      probability: 1,
+      canbe: false
+    },{
+      text: '再来一次',
+      probability: 1,
+      canbe: true
+    },{
+      text: '清空购物车',
+      probability: 1,
+      canbe: false
+    },{
+      text: '明天再来',
+      probability: 1,
+      canbe: true
+    }]
+    let contentHtml = '',
+        totalPro = 0,// 综合计算概率。目前使用平等概率——TODO
+        trueTotalPro = 0,// 多个可中项时，用来综合计算概率。不用该项是平等概率
+        tryTimes = 0,
+        tauntArr = ['一万次尝试，一万次失败', '你是不可能赢我的', '恭喜你又失败了', 'U, a loser!', 'Come on!', '就算你再怎么抽，你也不可能抽中的', '这就叫...黑幕', '啊，好气，好气哦']// 随机嘲讽的话
+    reward.forEach(e=>{
+      contentHtml += 
+      `<div class="sector">
+        <div class="sector-inner">
+          <span>${e.text}</span>
+        </div>
+      </div>`// 加图片——TODO——加结果图渐大渐隐
+      totalPro += e.probability
+      if (e.canbe) {
+        trueTotalPro += e.probability
+      }
+    })
+    //document.getElementById("lotcontent").insertAdjacentHTML('beforeEnd',contentHtml)
+    document.getElementById("lotcontent").innerHTML=contentHtml
+    // 人工控制概率--end
+
+    // 根据随机角度获取奖励
+    let getReward = (function() {
+      currentDeg = 0;
+      return function() {
+        // 转三圈到四圈
+        let rotateDeg = Math.random() * 360 + 720;
+        currentDeg += rotateDeg;
+        let curIndex = Math.floor((currentDeg + 18) % 360 / 36)
+        // 人工控制概率
+        if (reward[curIndex].canbe) {
+          return {
+            deg: currentDeg,
+            // text: rewardText === '谢谢参与' ? '很遗憾，您没有获得奖品。' : '恭喜获得: ' + rewardText
+            // text: reward[curIndex].text
+            text: tauntArr[Math.floor(Math.random()*tauntArr.length)]
+          }
+        } else {
+          return getReward()
+        }
+      }
+    })();
+
+    pointer.addEventListener('click', () => {
+      if (onRotation) return;
+      console.log('开始抽奖');
+      tryTimes++
+      onRotation = true;
+      lights.forEach(light => { light.className += ' light-twinkling'; });
+      let nextStatus = getReward();
+      console.log(nextStatus)
+      result.innerText = nextStatus.text;
+      result.style.display = 'none';
+      pointer.style.transform = `rotateZ(${nextStatus.deg}deg)`;
+    })
+    pointer.addEventListener('transitionend', () => {
+      console.log('抽奖结束');
+      setTimeout(() => { // 等闪烁三下结束
+        onRotation = false;
+        lights.forEach(light => { light.className = 'light'; });
+        result.style.display = 'block';
+      }, 300);
+    })
+</script>
+</html>
