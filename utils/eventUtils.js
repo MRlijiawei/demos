@@ -17,7 +17,7 @@ EventBus.prototype.emit = function(type, ...args) {
 			}
 		})
 	}
-	//return true是否需要？
+	return true//是否需要？
 }
 EventBus.prototype.addListener = function(type, fn) {
 	const handler = this._event.get(type)
