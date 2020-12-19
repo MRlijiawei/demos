@@ -1,0 +1,268 @@
+<html>
+<head>
+	<title>o.o</title>
+	<script src="./11/jquery-1.8.2.min.js"></script>
+	<style>
+		.abv{
+			width:800px;
+			height:500px;
+			position:absolute;
+			left:400px;
+			background-color:#a1a1a1;
+		}
+		.but0{
+			position:absolute;
+			left:400px;
+			top:520px;
+			cursor:pointer;
+		}
+		.but1{
+			position:absolute;
+			left:500px;
+			top:520px;
+			cursor:pointer;
+		}
+		.but2{
+			position:absolute;
+			left:600px;
+			top:520px;
+			cursor:pointer;
+		}
+		.but3{
+			position:absolute;
+			left:700px;
+			top:520px;
+			cursor:pointer;
+		}
+		.but4{
+			position:absolute;
+			left:800px;
+			top:520px;
+			cursor:pointer;
+		}
+		.but5{
+			position:absolute;
+			left:900px;
+			top:520px;
+			cursor:pointer;
+		}
+		.but6{
+			position:absolute;
+			left:1000px;
+			top:520px;
+			cursor:pointer;
+		}
+		.but7{
+			position:absolute;
+			left:1100px;
+			top:520px;
+			cursor:pointer;
+		}
+		.but8{
+			position:absolute;
+			left:1200px;
+			top:520px;
+			cursor:pointer;
+		}
+		.line{
+			width:800px;
+			height:3px;
+			position:absolute;
+			left:0px;
+			top:400px;
+			background-color:#a18534;
+		}
+		.time{
+			position:absolute;
+			left:550px;
+			top:550px;
+			width:40px;
+		}
+		.mark{
+			position:absolute;
+			left:850px;
+			top:550px;
+			width:40px;
+		}
+		#clock{
+			position:absolute;
+			left:600px;
+			top:550px;
+			width:100px;
+		}
+		#mark{
+			position:absolute;
+			left:900px;
+			top:550px;
+			width:100px;
+		}
+		.buttle{
+			position:absolute;
+			left:0px;
+			top:400px;
+			width:80px;
+			height:100px;
+			background-color:#a11711;
+		}
+	</style>
+</head>
+<body>
+	<div class="abv">
+		<div id="rain"></div>
+		<div class="line"></div>
+		<div class="buttle"></div>
+	</div>
+	
+	<button class="but0">0.0</button>
+	<button class="but1">Begin</button>
+	<button class="but2">Slow</button>
+	<button class="but3">Quick</button>
+	<button class="but4">Wind</button>
+	<button class="but5">Empty</button>
+	<button class="but6">Less</button>
+	<button class="but7">More</button>
+	<button class="but8">Bling</button>
+	<span class="time">Time:</span>
+	<input id="clock">
+	<span class="time" style="left:710px">S</span>
+	<span class="mark">Mark:</span>
+	<input id="mark" value="0">
+	<span class="mark" style="left:1010px">Coin</span>
+	
+	<script>
+		var onIt = false;
+		var i = 0;
+		var x = 0;
+		var xx;
+		var marks = 0;
+		var allTime;
+		var beginTime;
+		startTime = new Array;
+		now = new Array;
+		rainy = new Array;
+		blingRemove = new Array;
+		var times = 1;//more or less
+		var speed = 1;//quick or slow
+		var bling = false;
+		var oo = false;
+		
+		document.onmousemove = function(e){
+			mousePosition(e);
+			if(440 > x) {
+				xx = 0;
+			} else if(1160 < x) {
+				xx = 720;
+			} else {
+				xx = x - 440;
+			}
+			//$("#clock").val(mousePosition(e));
+			$(".buttle").css("left", (xx || 0) + "px");
+		};
+		$(".but0").click(function(){
+			oo = !oo;
+		});
+		$(".but2").click(function(){
+			speed *= 0.5;
+		});
+		$(".but3").click(function(){
+			speed *= 2;
+		});
+		$(".but6").click(function(){
+			times *= 2;
+			if("End" == $(".but1").text()){
+				clearInterval(timer);
+				timer = setInterval(rain, 200*times);
+			}
+		});
+		$(".but7").click(function(){
+			times *= 0.5;
+			if("End" == $(".but1").text()){
+				clearInterval(timer);
+				timer = setInterval(rain, 200*times);
+			}
+		});
+		$(".but8").click(function(){
+			if("End" == $(".but1").text()){
+				if(true == bling) {
+					bling = false;
+					$(".but8").text("Bling");
+				} else {
+					bling = true;
+					$(".but8").text("Back");
+				}
+			}
+		});
+		$(".but5").click(function(){
+			$("#rain").empty();
+			i = 0;
+		});
+		$(".but1").click(function(){
+			if("Begin" == $(".but1").text()) {
+				$(".but1").text("End");
+				beginTime = new Date();
+				timer = setInterval(rain, 200*times);
+			} else if("End" == $(".but1").text()) {
+				$(".but1").text("Begin");
+				marks = 0;
+				clearInterval(timer);
+				i = 0;
+			}
+			//继续按钮
+		});
+		
+		function rain() {
+			var mask = "<div class='" + i + "'></div>";
+			$("#rain").append(mask);
+			$("."+i).css("background-color", "rgb(" + Math.round(Math.random()*255) + "," + Math.round(Math.random()*255) + "," + Math.round(Math.random()*255) + ")");
+			$("."+i).css("left", Math.random()*790 + "px");
+			$("."+i).css("width", Math.random()*12 + 3 + "px");
+			$("."+i).css("height", $("."+i).css("width"));
+			$("."+i).css("position", "absolute");
+			$("."+i).css("border-radius", "50%");
+			//$("."+i).css("top", "0px");//顶部产生
+			if(oo) {
+				$("#rain div").css("background-color", "rgb(" + Math.round(Math.random()*255) + "," + Math.round(Math.random()*255) + "," + Math.round(Math.random()*255) + ")");
+			}
+			if(bling) {
+				$("."+i).css("top", Math.random()*395 + "px");//全局随机分布
+				//blingRemove[i] = setTimeout(removeRain(i), 2000);
+				blingRemove[i] = setTimeout(function(){
+					$("."+i).remove();
+					clearTimeout(blingRemove[i]);
+				}, 3000);
+			} else {
+				$("."+i).css("top", Math.random()*100 + "px");//顶部局部随机产生
+				raining(i);
+				i ++;
+			}
+		}
+		function raining(i){
+			startTime[i] = new Date();
+			rainy[i] = setInterval(function(){
+				now[i] = new Date();
+				$("#clock").val((now[i] - beginTime)/1000);
+				var times = (now[i] - startTime[i])/1000
+				if(370 < parseInt($("."+i).css("top")) || 0 > parseInt($("."+i).css("top"))) {
+					if((370 < parseInt($("."+i).css("top"))) && (parseInt($("."+i).css("left")) < (xx + 80)) && (parseInt($("."+i).css("left")) > xx)) {
+						marks ++;
+						$("#mark").val(marks);
+					}
+					$("."+i).remove();
+					clearInterval(rainy[i]);
+				} else {
+					var nowHeight;
+					nowHeight = speed*(300*times + 200*times*times);
+					$("."+i).css("top", nowHeight + "px");
+				}
+			}, 10);
+		}
+		function mousePosition(evt) {
+			evt = evt || window.event;
+			var xPos = evt.pageX || evt.clientX || evt.offsetX || evt.x;
+			var yPos = evt.pageY || evt.clientY || evt.offsetY || evt.y;
+			x = xPos;
+			return [xPos, yPos];
+		}
+	</script>
+</body>
+</html>
