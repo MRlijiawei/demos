@@ -43,15 +43,33 @@ function bubleSort(arr) {
 // 冒泡改进
 
 // 希尔排序（缩小增量）O(nlogn)
+function shellSort(arr) {
+    var len = arr.length,
+        temp,
+        gap = 1;
+    while (gap < len / 5) {
+        gap = gap * 5 + 1
+    }
+    for (gap; gap > 0; gap = Math.floor(gap / 5)) {
+        for (var i = gap; i < len; i++) {
+            temp = arr[i]
+            for (var j = i - gap; j >= 0 && temp < arr[j]; j -= gap) {
+                arr[j + gap] = arr[i]
+            }
+            arr[j + gap] = temp
+        }
+    }
+    return arr
+}
 
 // 快排O(nlogn)
 const quickSort = (function () {
-    // 比較
+    // 比較-可不用抽离
     function compare(a, b) {
         if (a === b) return 0
         return a < b ? -1 : 1
     }
-    // 交换
+    // 交换-可不用抽离
     function exchange(arr, a, b) {
         [arr[a], arr[b]] = [arr[b], arr[a]]
     }
@@ -61,14 +79,14 @@ const quickSort = (function () {
         let i = l,
             j = r
         while (i <= j) {
-            while(compare(arr[i],midval)===-1){
+            while (compare(arr[i], midval) === -1) {
                 i++
             }
-            while (compare(arr[j],midval)===1) {
+            while (compare(arr[j], midval) === 1) {
                 j--
             }
-            if(i<=j){
-                exchange(arr,i,j)
+            if (i <= j) {
+                exchange(arr, i, j)
                 i++
                 j--
             }
@@ -76,20 +94,20 @@ const quickSort = (function () {
         return i
     }
     // 快排
-    function quick(arr,l,r){
+    function quick(arr, l, r) {
         let index
-        if (arr.length>1) {
-            index = partition(arr,l,r)
-            if(l<index-1){
-                quick(arr,l,index-1)
+        if (arr.length > 1) {
+            index = partition(arr, l, r)
+            if (l < index - 1) {
+                quick(arr, l, index - 1)
             }
-            if(index<r){
-                quick(arr,index,r)
+            if (index < r) {
+                quick(arr, index, r)
             }
         }
         return arr
     }
-    return function quickSort(arr){
-        return quick(arr,0,arr.length-1)
+    return function quickSort(arr) {
+        return quick(arr, 0, arr.length - 1)
     }
 })()
